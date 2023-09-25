@@ -1,6 +1,8 @@
 import './globals.css'
 import { Sen } from 'next/font/google'
-import NavBar from '@/components/NavBar/page'
+import { NavBar } from '@/components/NavBar/page';
+// import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { Footer } from '@/components/Footer/page';
 
 const sen = Sen({ subsets: ['latin'] })
 
@@ -12,11 +14,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+
+      </head>
       <body className={sen.className}>
         <header>
           <NavBar/>
         </header>
         {children}
+
+          <Footer/>
         </body>
     </html>
   )
