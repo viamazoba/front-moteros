@@ -1,5 +1,6 @@
 import './globals.css'
 import { Sen } from 'next/font/google'
+import NavBar from '@/components/NavBar/page'
 
 const sen = Sen({ subsets: ['latin'] })
 
@@ -11,7 +12,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={sen.className}>{children}</body>
+      <body className={sen.className}>
+        <header>
+          <NavBar/>
+        </header>
+        {children}
+        </body>
     </html>
   )
 }
