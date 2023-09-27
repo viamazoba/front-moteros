@@ -11,7 +11,11 @@
       font-family: inherit;
       font-size: $font-size-smaller;
       font-weight: 600;
-      color: $color-black;
+      color: $color-white;
+
+      @media (min-width:1024px) {
+        color: $color-black;
+      }
     }
 
     select {
