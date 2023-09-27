@@ -1,0 +1,38 @@
+@import '../../styles/abstract/variables';
+
+.cab-search {
+  margin-top: 10px;
+
+  .search-form{
+    border-radius: 5px;
+  }
+}
+
+.search-inputs {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  column-gap: 4%;
+}
+
+@media screen and (min-width: 768px) {
+
+  .cab-search {
+    margin-top: 20px;
+  }
+}
+
+
+@media screen and (min-width: 1000px) {
+
+  .search-inputs {
+    width: 66%;
+  }
+
+  .search-form {
+    display: flex;
+    padding: 30px;
+    background-color: $color-white;
+  }
+}

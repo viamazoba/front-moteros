@@ -1,0 +1,61 @@
+@import '../../styles/abstract/variables.scss';
+
+.search-button {
+    display: flex;
+    width: 48%;
+
+  &.modal {
+    width: 100%;
+  }
+
+  button[type="button"] {
+    display: inline-block;
+    width: 100%;
+    min-height: 25.5px;
+    padding: 5px 20px;
+    margin-top: 25px;
+    text-align: center;
+    font-family: inherit;
+    font-weight: 700;
+    color: $color-white;
+    background-color: $color-red;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+.search-button button:hover {
+  outline: 1px solid $color-red;
+  background-color: $color-white;
+  color: $color-red;
+}
+
+@media screen and (min-width: 768px) {
+
+  .search-button {
+    &.modal {
+      width: 100%;
+    }
+
+    button[type="button"] {
+      padding: 9px 20px;
+      font-size: 1.6rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+
+  .search-button {
+    width: 30%;
+
+    button[type="button"] {
+      margin-left: 12%;
+    }
+
+    button {
+      margin: 0;
+    }
+  }
+}
