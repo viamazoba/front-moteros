@@ -1,0 +1,17 @@
+@import './variables.scss';
+
+@mixin basic-card($radius:5px, $color: $color-dark-gray) {
+    
+    box-shadow: 0px 2px 6px $color;
+    border-radius: 5px;
+}
+
+@mixin button-shadow($font:700, $radius:5px, $vertical:8px, $horizontal:8px) {
+    
+    color: $color-white;
+    font-weight: $font;
+    background-color: $color-red;
+    padding: $vertical $horizontal;
+    border-radius: $radius;
+    box-shadow: 0px 0px 4px $color-red;
+}
