@@ -5,6 +5,7 @@ import WhyMoteros from '@/components/WhyMoteros/page'
 import BrandsFleet from '@/components/BrandsFleet/page'
 import BannerHome from '@/components/BannerHome/page'
 import CardWorkShop from '@/components/CardWorkShop'
+import CardBlog from '@/components/CardBlog'
 
 export const Home = () => {
   return (
@@ -13,6 +14,7 @@ export const Home = () => {
       <WhyMoteros/>
       <BrandsFleet/>
       <CardWorkShop/>
+      <CardBlog/>
     </>
   )
 }
