@@ -35,7 +35,7 @@ export const login = () => {
                   id="sign-in-email"
                   name="email"
                   required
-                  placeholder="example@moteros.com"
+                  placeholder="ejemplo@moteros.com"
                 //   value={loginForm.email}
                 />
               </div>
