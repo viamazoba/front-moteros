@@ -19,14 +19,14 @@ export default function RootLayout({ children }) {
 
       </head>
       <body className={sen.className}>
-        <DisableComponent disablePaths={['/login', '/login-password', '/login-Password', '/login-register-password']}>
+        <DisableComponent disablePaths={['/login', '/register', '/login-Password', '/login-register-password']}>
           <header>
             <NavBar/>
           </header>
         </DisableComponent>
         {children}
 
-        <DisableComponent disablePaths={['/login', '/login-password', '/login-Password', '/login-register-password']}>
+        <DisableComponent disablePaths={['/login', '/register', '/login-Password', '/login-register-password']}>
           <Footer/>
         </DisableComponent>
         </body>
