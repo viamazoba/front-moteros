@@ -3,6 +3,7 @@ import { Sen } from 'next/font/google'
 import { NavBar } from '@/components/NavBar/page';
 // import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Footer } from '@/components/Footer/page';
+import DisableComponent from '@/HOC/DisableComponent';
 
 const sen = Sen({ subsets: ['latin'] })
 
@@ -18,12 +19,16 @@ export default function RootLayout({ children }) {
 
       </head>
       <body className={sen.className}>
-        <header>
-          <NavBar/>
-        </header>
+        <DisableComponent disablePaths={['/login', '/login-password', '/login-Password', '/login-register-password']}>
+          <header>
+            <NavBar/>
+          </header>
+        </DisableComponent>
         {children}
 
+        <DisableComponent disablePaths={['/login', '/login-password', '/login-Password', '/login-register-password']}>
           <Footer/>
+        </DisableComponent>
         </body>
     </html>
   )
