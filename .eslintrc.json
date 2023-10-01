@@ -8,7 +8,6 @@
     "react/jsx-pascal-case": ["off"],
     "react/function-component-definition": "off",
     "react/prop-types": 0,
-    "react/jsx-props-no-spreading": "off",
-    "linebreak-style": ["error", "windows"]
+    "react/jsx-props-no-spreading": "off"
   }
 }
