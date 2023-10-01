@@ -9,47 +9,49 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 import { Box } from "@mui/material";
+import './Footer.scss'
 
 export const Footer =() => {
   return (
     <Box
       component="footer"
       sx={{
-        backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
+        // backgroundColor: (theme) =>
+        //   theme.palette.mode === "light"
+        //     ? theme.palette.grey[200]
+        //     : theme.palette.grey[800],
         p: 6,
       }}
+      className="footer-container"
     >
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>
             <Typography variant="h5" color="text.primary" gutterBottom>
-              About Us
+              Sobre Nosotros
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              We are XYZ company, dedicated to providing the best service to our
-              customers.
+              Somos una página web que busca la integración de almacenes de repuestos, talleres y servicios confluentes al mercado de las
+              motocicletas. 
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h5" color="text.primary" gutterBottom>
-              Contact Us
+              Contáctanos
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              123 Main Street, Anytown, USA
+              Cra 23#12B97, Medellín, Colombia
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Email: info@example.com
+              Email: example@moteros.com
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Phone: +1 234 567 8901
+              Teléfono: +57 300950021
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h5" color="text.primary" gutterBottom>
-              Follow Us
+              Síguenos
             </Typography>
             <Link href="https://www.facebook.com/" color="inherit">
               <Facebook />

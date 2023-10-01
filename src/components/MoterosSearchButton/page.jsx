@@ -5,7 +5,7 @@ export const MoterosSearchButton = ({ modal, handleSearchButton }) => {
 
   return (
     <div className={`search-button ${modalStyle}`}>
-      <button className="search-button" type="button" onClick={handleSearchButton}>SEARCH</button>
+      <button className="search-button" type="button" onClick={handleSearchButton}>BUSCAR</button>
     </div>
   );
 };

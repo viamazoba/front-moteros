@@ -64,6 +64,16 @@ const register = () => {
                 //   value={signInForm.email}
                 />
               </div>
+              <div className='form-group profile-select'>
+                <label htmlFor="perfil">
+                  <p>Registrate como:</p>
+                  <select name="perfil" id="perfil" placeholder='--------'>
+                    <option value="Usuario">Usuario</option>
+                    <option value="Taller">Taller</option>
+                    <option value="Tienda">Tienda Repuestos</option>
+                  </select>
+                </label>
+              </div>
               <div className="form-group password-group">
                 <label htmlFor="password">Contraseña</label>
                 <br />

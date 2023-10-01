@@ -2,7 +2,7 @@
 import './MenuPicker.scss';
 
 export const MenuPicker = ({
-  title, inpName, placeholder, modal, handleInput, value,
+  title, inpName, placeholder, modal, handleInput, value, listOfValues
 }) => {
   const modalStyle = modal ? 'modal' : '';
   const cities = [
@@ -30,7 +30,7 @@ export const MenuPicker = ({
           required
         >
           <option value="" disabled>{placeholder}</option>
-          {cities.map((city) => (<option key={city} value={city}>{city}</option>))}
+          {listOfValues.map((value) => (<option key={value} value={value}>{value}</option>))}
         </select>
       </label>
     </div>

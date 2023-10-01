@@ -9,13 +9,13 @@ import CardBlog from '@/components/CardBlog'
 
 export const Home = () => {
   return (
-    <>
+    <main className='home-container'>
       <BannerHome/>
       <WhyMoteros/>
       <BrandsFleet/>
       <CardWorkShop/>
       <CardBlog/>
-    </>
+    </main>
   )
 }
 

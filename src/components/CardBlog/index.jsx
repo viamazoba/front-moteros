@@ -9,7 +9,7 @@ export const CardBlog = () => {
       id: 1,
       day: '01',
       month: 'JAN',
-      author: 'Julia Holmes',
+      author: 'Carlos Hernández',
       title: 'Lorem Ipsum is simply the of the printing and dummy text of typesetting..',
       content: 'Lorem Ipsum is simply dummy since..',
       image: '/modern_workshop.png',
@@ -18,7 +18,7 @@ export const CardBlog = () => {
       id: 2,
       day: '24',
       month: 'FEB',
-      author: 'Elthon Marshall',
+      author: 'Camilo Murillo',
       title: 'Lorem Ipsum is simply the of the printing and dummy text of typesetting..',
       content: 'Lorem Ipsum is simply dummy since..',
       image: '/driver.png',
@@ -27,7 +27,7 @@ export const CardBlog = () => {
       id: 3,
       day: '27',
       month: 'AUG',
-      author: 'James Fromm',
+      author: 'Catalina Niño',
       title: 'Lorem Ipsum is simply the of the printing and dummy text of typesetting..',
       content: 'Lorem Ipsum is simply dummy since..',
       image: '/classic.png',
@@ -51,13 +51,13 @@ export const CardBlog = () => {
             </div>
             <div className="container-blog__text-section">
               <p>
-                Posted By:
+                Posteado Por:
                 {' '}
                 {information.author}
               </p>
               <h3>{information.title}</h3>
               <p>{information.content}</p>
-              <button>READ MORE</button>
+              <button>LEER MÁS</button>
             </div>
 
           </div>

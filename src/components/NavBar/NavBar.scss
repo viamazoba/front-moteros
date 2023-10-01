@@ -2,7 +2,6 @@
 
 .container-header{
     background-color: $color-red;
-    border-radius: 0px 0px 5px 5px;
 
     .container-header__logo-container{
         display: flex;
@@ -84,12 +83,14 @@
   .menu-dropdown {
     display: flex;
     flex-direction: column;
+    font-family: inherit;
+    font-size: 14px;
     position: absolute;
     top: 0;
     right: 0;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    // border-radius: 10px;
     padding: 0 0.5rem;
     width: 50vw;
     height: 100vh;
@@ -109,6 +110,11 @@
   
     a {
       color: #222222;
+      text-decoration: none;
+
+      &:hover{
+        color: $color-red;
+      }
     }
   
     &--closed {
