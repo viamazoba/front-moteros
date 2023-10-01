@@ -1,0 +1,49 @@
+@import '../../styles/abstract/variables.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.form-user-container {
+    background-color: $color-second-white;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
+    position: relative;
+    @include general-shadow;
+
+    .form-user-container__xmark{
+      position: absolute;
+      font-size: 20px;
+      color: $color-second-white;
+      cursor: pointer;
+      top: -27px;
+      right: -5px;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content:center;
+    }
+
+    div:last-child{
+      margin-top: 10px;
+    }
+
+    label{
+      @include label-style;
+    }
+    input{
+      @include input-style;
+    }
+
+    select{
+      @include select-style
+    }
+
+      button{
+        @include button-shadow($color-choose: $color-green);
+      }
+      
+      
+
+}

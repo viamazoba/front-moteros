@@ -1,0 +1,114 @@
+@import '../../styles/abstract/variables.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.person{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    max-width: 310px;
+      .person__card {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          margin: 15px;
+          width: 87%;
+          padding: 30px 20px;
+          border-radius: 5px;
+        @include general-shadow;
+          div{
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img-container{
+            margin-bottom: 15px;
+        }
+
+        .profile-img-button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background-color: transparent;
+        }
+          .person__card__info{
+            display: flex;
+            flex-direction: column;
+            .card__name{
+              display: flex;
+              justify-content: center;
+              text-align: center;
+            }
+          }
+        }
+        
+        .profile-img {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          position: relative;
+          
+
+          animation: img-2 3s ease 0s 1 normal forwards;
+          @keyframes img-2 {
+            0%,
+            100% {
+              transform: translateX(0%);
+              transform-origin: 50% 50%;
+            }
+          
+            15% {
+              transform: translateX(-30px) rotate(-6deg);
+            }
+          
+            30% {
+              transform: translateX(15px) rotate(6deg);
+            }
+          
+            45% {
+              transform: translateX(-15px) rotate(-3.6deg);
+            }
+          
+            60% {
+              transform: translateX(9px) rotate(2.4deg);
+            }
+          
+            75% {
+              transform: translateX(-6px) rotate(-1.2deg);
+            }
+          }
+
+        }
+        
+        .name {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        
+        .email {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 15px;
+        }
+        
+        
+        .additional-link {
+          background-color: #fff;
+          border: 0.5px solid $color-red;
+          border-radius: 5px;
+          display: block;
+          color: $color-red;
+          font-size: 13px; 
+          text-decoration: none; 
+          margin: 5px 5px;
+          font-weight: 700;
+          padding: 5px 6px;
+          box-shadow: 0px 0px 4px rgba(235, 87, 87, 0.2);
+          
+        }
+        
+        .additional-link:hover {
+            box-shadow: 0px 0px 4px 1px rgba(235, 87, 87, 0.6); 
+        }
+  }
