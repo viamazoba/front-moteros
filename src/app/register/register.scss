@@ -1,4 +1,5 @@
 @import '../../styles/abstract/variables.scss' ;
+@import '../../styles/abstract/mixins.scss';
 
 .signup-card{
     display: flex;
@@ -118,6 +119,19 @@ form{
             color: $color-red;
             box-shadow: 0px 1px 9px 1px $color-red;
           }
+      }
+    }
+
+    .profile-select{
+      label{
+        @include label-style;
+        p{
+          color: $color-black;
+        }
+      }
+
+      select{
+        @include select-style;
       }
     }
     .password-group{

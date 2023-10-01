@@ -25,7 +25,7 @@ export const BrandsFleet = () => {
     className: 'slider-container',
     centerPadding: '60px',
     infinite: true,
-    speed: 500,
+    speed: 400,
     slidesToShow: 5,
     autoplay: true,
     nextArrow: <ArrowStyle />,

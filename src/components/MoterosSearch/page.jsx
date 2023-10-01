@@ -24,6 +24,24 @@ export const MoterosSearch = () => {
     console.log('Se activa handle del botón - HandleSearchButton');
   };
 
+  const bikerBrand = [
+    'Yamaha'
+  ]
+
+  const bikerModel = [
+    'XTZ 250',
+    'XTZ 150'
+  ]
+
+  const bikerYear = [
+    2010,
+    2012,
+    2015,
+    2017,
+    2022,
+    2023
+  ]
+
   return (
 
     <div className="cab-search">
@@ -38,6 +56,7 @@ export const MoterosSearch = () => {
             placeholder="---------"
             handleInput={handleTripForm}
             value={tripForm?.pickUpLoc}
+            listOfValues={bikerBrand}
           />
 
           <MenuPicker
@@ -50,6 +69,7 @@ export const MoterosSearch = () => {
                 ? tripForm?.dropOffLoc
                 : ''
             }
+            listOfValues={bikerModel}
           />
 
           <MenuPicker
@@ -57,6 +77,7 @@ export const MoterosSearch = () => {
             inpName="dropOffLoc"
             placeholder="---------"
             handleInput={handleTripForm}
+            listOfValues={bikerYear}
             value={
               tripForm?.dropOffLoc !== tripForm?.pickUpLoc
                 ? tripForm?.dropOffLoc
