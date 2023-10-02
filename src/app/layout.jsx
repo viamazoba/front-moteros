@@ -1,9 +1,9 @@
 import './globals.css'
 import { Sen } from 'next/font/google'
 import { NavBar } from '@/components/NavBar/page';
-// import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Footer } from '@/components/Footer/page';
 import DisableComponent from '@/HOC/DisableComponent';
+import ReduxProvider from '@/redux/provider';
 
 const sen = Sen({ subsets: ['latin'] })
 
@@ -18,18 +18,20 @@ export default function RootLayout({ children }) {
       <head>
 
       </head>
-      <body className={sen.className}>
-        <DisableComponent disablePaths={['/login', '/register', '/login-Password', '/login-register-password']}>
-          <header>
-            <NavBar/>
-          </header>
-        </DisableComponent>
-        {children}
+      <ReduxProvider>
+        <body className={sen.className}>
+          <DisableComponent disablePaths={['/login', '/register']}>
+            <header>
+              <NavBar/>
+            </header>
+          </DisableComponent>
+          {children}
 
-        <DisableComponent disablePaths={['/login', '/register', '/login-Password', '/login-register-password']}>
-          <Footer/>
-        </DisableComponent>
-        </body>
+          <DisableComponent disablePaths={['/login', '/register']}>
+            <Footer/>
+          </DisableComponent>
+          </body>
+      </ReduxProvider>
     </html>
   )
 }

@@ -5,18 +5,18 @@ export const MenuPicker = ({
   title, inpName, placeholder, modal, handleInput, value, listOfValues
 }) => {
   const modalStyle = modal ? 'modal' : '';
-  const cities = [
-    'Bogotá',
-    'Medellín',
-    'Cali',
-    'Barranquilla',
-    'Cartagena',
-    'Bucaramanga',
-    'Santa Marta',
-    'Pereira',
-    'Manizales',
-    'Cúcuta',
-  ];
+  // const cities = [
+  //   'Bogotá',
+  //   'Medellín',
+  //   'Cali',
+  //   'Barranquilla',
+  //   'Cartagena',
+  //   'Bucaramanga',
+  //   'Santa Marta',
+  //   'Pereira',
+  //   'Manizales',
+  //   'Cúcuta',
+  // ];
   return (
     <div className={`container-input ${modalStyle}`}>
       <label htmlFor={inpName}>

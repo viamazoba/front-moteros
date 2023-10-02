@@ -1,11 +1,70 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './register.scss'
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import Image from 'next/image';
+import { useRegisterUserMutation } from '@/redux/services/userApi';
+import { handleRegisterUser } from '@/redux/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
+
 
 const register = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  // const nombre = useSelector((state) => state.userReducer.name)
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const [showMatchWarning, setShowMatchWarning] = useState(false);
+  const [showEmailhWarning, setShowEmailWarning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [signInForm, setSignInForm] = useState({
+    name: '',
+    lastName: '',
+    email: '',
+    role: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [registerUser] = useRegisterUserMutation();
+
+  const handleSignInForm = (event) => {
+    const { name, value } = event.target;
+    setSignInForm({
+      ...signInForm,
+      [name]: value,
+    });
+  };
+
+  const handleInfoRegister =  async (e)=>{
+    e.preventDefault()
+    console.log('Valores a enviar: ', signInForm)
+    const { data } = await registerUser(signInForm)
+    dispatch(handleRegisterUser(data.body))
+    sessionStorage.setItem('token', data.headers['Authorization'])
+    sessionStorage.setItem('userData', JSON.stringify(data.body.data))
+    router.push('/profile')
+  }
+
+  useEffect(() => {
+    if (signInForm.password !== signInForm.confirmPassword) {
+      setShowMatchWarning(true);
+    } else {
+      setShowMatchWarning(false);
+    }
+
+    if(!emailPattern.test(signInForm.email) && signInForm.email){
+      setShowEmailWarning(true)
+    }else{
+      setShowEmailWarning(false)
+    }
+  }, [signInForm.password, signInForm.confirmPassword, signInForm.email]);
+
+
     return (
         <div className='signup-card'>
           <div className='access-main'>
@@ -19,8 +78,7 @@ const register = () => {
               />
               <h2>Moteros</h2>
             </div>
-            {/* <form onSubmit={handleClickSubmit}> */}
-            <form>
+            <form onSubmit={handleInfoRegister}>
               <h4>Crea tu cuenta</h4>
               <p>Ingresa tus datos para crear una cuenta</p>
     
@@ -30,23 +88,23 @@ const register = () => {
                   <br />
                   <input
                     type="text"
-                    id="firstname"
-                    name="first_name"
+                    id="name"
+                    name="name"
                     required
                     placeholder="Nombre"
-                    // onChange={handleSignInForm}
-                    // value={signInForm.first_name}
+                    onChange={handleSignInForm}
+                    value={signInForm.name}
                   />
                 </div>
                 <div className="lastname-group">
                   <input
                     type="text"
-                    id="lastname"
-                    name="last_name"
+                    id="lastName"
+                    name="lastName"
                     required
                     placeholder="Apellido"
-                    // onChange={handleSignInForm}
-                    // value={signInForm.last_name}
+                    onChange={handleSignInForm}
+                    value={signInForm.lastName}
                   />
                 </div>
               </div>
@@ -55,22 +113,30 @@ const register = () => {
                 <label htmlFor="email">Correo Electrónico</label>
                 <br />
                 <input
-                //   onChange={handleSignInForm}
+                  onChange={handleSignInForm}
                   type="email"
                   id="email"
                   name="email"
                   required
                   placeholder="ejemplo@moteros.com"
-                //   value={signInForm.email}
+                  value={signInForm.email}
                 />
+                {showEmailhWarning && <p className='validation-warning'>Ingrese un correo válido</p>}
               </div>
               <div className='form-group profile-select'>
-                <label htmlFor="perfil">
+                <label htmlFor="role">
                   <p>Registrate como:</p>
-                  <select name="perfil" id="perfil" placeholder='--------'>
-                    <option value="Usuario">Usuario</option>
-                    <option value="Taller">Taller</option>
-                    <option value="Tienda">Tienda Repuestos</option>
+                  <select name="role" 
+                  id="role" 
+                  placeholder='--------'
+                  onChange={handleSignInForm}
+                  value={signInForm.role}
+                  required
+                  >
+                    <option value="">Selecciona un rol</option>
+                    <option value="user">Usuario</option>
+                    <option value="Taller" disabled>Taller</option>
+                    <option value="Tienda" disabled>Tienda Repuestos</option>
                   </select>
                 </label>
               </div>
@@ -78,27 +144,28 @@ const register = () => {
                 <label htmlFor="password">Contraseña</label>
                 <br />
                 <input
-                //   onChange={handleSignInForm}
+                  onChange={handleSignInForm}
                   type="password"
                   id="password"
                   name="password"
                   required
                   placeholder="***************"
-                //   value={signInForm.password}
+                  value={signInForm.password}
                 />
               </div>
               <div className="form-group password-group">
-                <label htmlFor="password">Confirmar Contraseña</label>
+                <label htmlFor="confirm-password">Confirmar Contraseña</label>
                 <br />
                 <input
-                //   onChange={handleSignInForm}
+                  onChange={handleSignInForm}
                   type="password"
                   id="confirm-password"
-                  name="password"
+                  name="confirmPassword"
                   required
                   placeholder="***************"
-                //   value={signInForm.password}
+                  value={signInForm.confirmPassword}
                 />
+                {showMatchWarning && <p className='validation-warning'>Las contraseñas no coinciden</p>}
               </div>
               <div className="form-group">
                 <div className="btn">
@@ -125,18 +192,11 @@ const register = () => {
               <p className="text-center">
                 ¿Ya tienes una cuenta?
                 {/* <span onClick={handleShowAccess}>Ingresar</span> */}
-                <span>Ingresar</span>
+                <span onClick={() => router.push('/login')}>Ingresar</span>
               </p>
             </form>
           </div>
-          {/* <Modal showModal={modal.show} handleShowModal={() => setModal({ ...modal, show: false })}>
-            <h2>{modal.title}</h2>
-            <p>{modal.msg}</p>
-            <div className="center">
-              <button className="secondary-button" onClick={handleOkButton} type="button">Ok</button>
-            </div>
-          </Modal>
-          <LoadingModal show={loadingModal} /> */}
+          {/* {isLoading && <Loading/>} */}
         </div>
       );
 }
