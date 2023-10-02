@@ -1,15 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable arrow-body-style */
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import './PersonInformation.scss'
+import { useDispatch, useSelector } from 'react-redux';
 
-const PersonInformation = () => {
-
-    const [userData, setUserData] = useState([{
-        user_name: "Juan",
-        gender: "Hombre",
-        birthday: "24/8/1996"
-    }])
+const PersonInformation = ({onHandleWatchForm}) => {
+    const userData = useSelector((state) => state.userReducer)
 
     const emptyFields = '--------';
 
@@ -22,48 +20,36 @@ const PersonInformation = () => {
         <div>
         <table>
             <tbody>
-            {userData.map((item) => {
-                return (
-                <>
-                    <tr>
-                    <th>
-                        <b>Nombre</b>
-                    </th>
-                    <th>{item?.user_name || emptyFields}</th>
-                    </tr>
-                    <tr>
-                    <th>
-                        <b>Apellido</b>
-                    </th>
-                    <th>{item?.gender || emptyFields}</th>
-                    </tr>
-                    <tr>
-                    <th>
-                        <b>Fecha Nacimiento</b>
-                    </th>
-                    <th>{item?.birthday || emptyFields}</th>
-                    </tr>
-                    <tr>
-                    <th>
-                        <b>Género</b>
-                    </th>
-                    <th>{item?.address || emptyFields}</th>
-                    </tr>
-                    <tr>
-                    <th>
-                        <b>Cuidad</b>
-                    </th>
-                    <th>{item?.name_city || emptyFields}</th>
-                    </tr>
-                    {/* <tr>
-                    <th>
-                        <b>Zip</b>
-                    </th>
-                    <th>{item?.postal_code || emptyFields}</th>
-                    </tr> */}
-                </>
-                );
-            })}
+            <tr>
+                <th>
+                    <b>Nombre</b>
+                </th>
+                <th>{userData.value.name || emptyFields}</th>
+                </tr>
+                <tr>
+                <th>
+                    <b>Apellido</b>
+                </th>
+                <th>{userData.value.lastName || emptyFields}</th>
+                </tr>
+                <tr>
+                <th>
+                    <b>Fecha Nacimiento</b>
+                </th>
+                <th>{userData.value.birthday || emptyFields}</th>
+                </tr>
+                <tr>
+                <th>
+                    <b>Género</b>
+                </th>
+                <th>{userData.value.gender || emptyFields}</th>
+                </tr>
+                <tr>
+                <th>
+                    <b>Cuidad</b>
+                </th>
+                <th>{userData.value.city || emptyFields}</th>
+                </tr>
             </tbody>
         </table>
         </div>
@@ -72,9 +58,7 @@ const PersonInformation = () => {
         <button
             className="ProfileConfigUser__container--buttonEditar"
             type="button"
-            // onClick={() => {
-            // return handleUserEdit(email || localStorage.getItem('email'));
-            // }}
+            onClick={onHandleWatchForm}
         >
             Editar
         </button>

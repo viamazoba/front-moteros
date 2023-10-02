@@ -9,6 +9,7 @@
     border-radius: 5px;
     position: relative;
     @include general-shadow;
+    transition: all 0.5s ease-in-out;
 
     .form-user-container__xmark{
       position: absolute;

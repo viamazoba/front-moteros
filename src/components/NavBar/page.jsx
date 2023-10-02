@@ -1,40 +1,35 @@
 /* eslint-disable arrow-body-style */
 'use client'
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import './NavBar.scss';
 import { faBars, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@mui/material/Button';
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
-// import { AppContext } from '../../store/AppContext';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleUserLogOut } from '@/redux/slices/userSlice';
 
 export const NavBar = ()=> {
-  // const store = useContext(AppContext);
-  // const {
-  //   userData, handleSignOut, setUserData,
-  // } = store;
+  const dispatch = useDispatch()
+  const userData = useSelector((state) => state.userReducer.value)
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
 
+  const handleUserMenuClick = () => {
+    setUserMenuOpen(!isUserMenuOpen);
+  };
   const handleSignOut = () =>{
-    console.log('Saliendo de la aplicación')
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('userData')
+    handleUserMenuClick()
+    dispatch(handleUserLogOut)
   }
 
   const handleMenuClick = () => {
     setMenuOpen(!isMenuOpen);
   };
 
-  const handleUserMenuClick = () => {
-    setUserMenuOpen(!isUserMenuOpen);
-  };
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('token')) {
-  //     setUserData([JSON.parse(localStorage.getItem('userData'))]);
-  //   }
-  // }, []);
 
   return (
     <div className="container-header">
@@ -87,17 +82,22 @@ export const NavBar = ()=> {
           }
         >
           {
-          false //Aquí se hacía validación con datos usuario
+          sessionStorage.getItem('token')
           && (
           <>
             <div className="container-header__information">
               <div className="container-header__user-info">
                 <div className="container-header__user-image">
-                  <Image src={userData[0].user_img || 'https://icon-library.com/images/persona-icon/persona-icon-25.jpg'} alt="" />
+                  <Image 
+                  src={userData.avatar || '/user_icon.png'} 
+                  alt="Person avatar" 
+                  width={50}
+                  height={50}
+                  />
                 </div>
                 <div className="container-header__user-data">
-                  <p>{userData[0]?.user_name || 'Unknown'}</p>
-                  <p>{localStorage.getItem('email') || ''}</p>
+                  <p>{userData.name || 'Unknown'}</p>
+                  <p>{userData.email || 'example@gmail.com'}</p>
                 </div>
               </div>
               <FontAwesomeIcon
@@ -108,13 +108,12 @@ export const NavBar = ()=> {
               />
             </div>
             <hr />
-            <Link href="/" onClick={handleUserMenuClick}>Profile</Link>
+            <Link href="/profile" onClick={handleUserMenuClick}>Perfil</Link>
             <Link href="/" onClick={handleSignOut}>Salir</Link>
           </>
           )}
           {
-          // Aquí se hacia validación con los datos del usuario
-          true
+          !sessionStorage.getItem('token')
           && (
           <>
             <FontAwesomeIcon
@@ -125,7 +124,7 @@ export const NavBar = ()=> {
             />
             <hr />
             <Link href="/login" onClick={handleUserMenuClick}>Ingresar</Link>
-            <Link href="/login" onClick={handleUserMenuClick}>Registrarse</Link>
+            <Link href="/register" onClick={handleUserMenuClick}>Registrarse</Link>
 
           </>
           )}
@@ -142,9 +141,9 @@ export const NavBar = ()=> {
             size="2x"
           />
           <hr />
-          <a href="/">Inicio</a>
-          <a href="/">Repuestos</a>
-          <a href="/">Talleres</a>
+          <Link href="/">Inicio</Link>
+          <Link href="/">Repuestos</Link>
+          <Link href="/">Talleres</Link>
         </div>
       </header>
     </div>
