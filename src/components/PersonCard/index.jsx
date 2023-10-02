@@ -1,20 +1,20 @@
+/* eslint-disable arrow-body-style */
 'use client'
 
 import { useState, useRef } from 'react';
-// import { AppContext } from '../../store/AppContext';
 import ImageLoading from '../ImageLoading';
 import Image from 'next/image';
 import './PersonCard.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleEditUser } from '@/redux/slices/userSlice';
+import { useEditUserMutation } from '@/redux/services/userApi';
 
 export const PersonCard = (props) => {
-//   const store = useContext(AppContext);
-//   const {
-//     userData, fileInputRef, handleUserImageChange, imageIsLoading,
-//   } = store;
-//   const { btn2, userName } = props;
-const [imageIsLoading, setImageIsLoading] = useState(false);
-const [userData, setUserData] = useState([])
-const fileInputRef = useRef(null);
+  const userData = useSelector((state) => state.userReducer)
+  const [imageIsLoading, setImageIsLoading] = useState(false);
+  const fileInputRef = useRef(null);
+  const dispatch = useDispatch()
+  const [editUser] = useEditUserMutation()
 
 const handleUserImageChange = async (event) => {
     const selectedFile = event.target.files[0];
@@ -23,30 +23,33 @@ const handleUserImageChange = async (event) => {
 
     if (selectedFile) {
       setImageIsLoading(true);
-      const data = new FormData();
-      data.append('file', selectedFile);
-      data.append('upload_preset', 'hotelImages');
+      const dataImage = new FormData();
+      dataImage.append('file', selectedFile);
+      dataImage.append('upload_preset', 'hotelImages');
       const res = await fetch(
         'https://api.cloudinary.com/v1_1/drnclewqh/image/upload',
         {
           method: 'POST',
-          body: data,
+          body: dataImage,
         },
       );
       const file = await res.json();
-      console.log('Esta es la url de la imagen: ', file)
-    //   const token = localStorage.getItem('token');
-    //   await editUserImage(token, file.secure_url);
-    //   localStorage.removeItem('userData');
-
-    //   const found = await getUserByEmail(
-    //     email || localStorage.getItem('email'),
-    //   );
-    //   localStorage.setItem('userData', JSON.stringify(found.data.user));
-    //   setUserData([{ ...found.data.user }]);
+      console.log('Esta es la url de la imagen: ', file.secure_url)
+      const token = sessionStorage.getItem('token');
+      const userData = JSON.parse(sessionStorage.getItem('userData'))
+      userData.avatar = file.secure_url
+      sessionStorage.removeItem('userData');
+      sessionStorage.setItem('userData', JSON.stringify(userData));
+      dispatch(handleEditUser({avatar: file.secure_url}))
+      const data = {
+        headers: {
+          Authorization: token,
+        },
+        body: {avatar: file.secure_url},
+      }
+      const response = await editUser(data);
+      console.log('Esta es la respuesta al editar Imagen: ', response)
       setImageIsLoading(false);
-
-    //   setImageUser(file.secure_url);
     }
   };
 
@@ -67,7 +70,7 @@ const handleUserImageChange = async (event) => {
               >
                 <Image
                   src={
-                    userData[0]?.user_img
+                    userData.value.avatar
                     || '/user_icon.png'
                   }
                   alt="profileImg"
@@ -89,10 +92,10 @@ const handleUserImageChange = async (event) => {
         </div>
         <div className="person__card__info">
           <div>
-            <h2 className="card__name">{userData[0]?.name || 'User Name'}</h2>
+            <h2 className="card__name">{userData.value.name || 'User Name'}</h2>
           </div>
           <div>
-            <h3 className="email">{localStorage.email || 'example@moteros.com'}</h3>
+            <h3 className="email">{userData.value.email || 'example@moteros.com'}</h3>
           </div>
         </div>
         <div className="person__card__additional-info">

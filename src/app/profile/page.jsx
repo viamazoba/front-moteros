@@ -9,6 +9,10 @@ import FormUserInfo from '@/components/FormUserInfo';
 
 export const profile = () => {
   const [closeUserForm, setCloseUserForm] = useState(false)
+
+  const handleWatchForm = ()=>{
+    setCloseUserForm(!closeUserForm)
+  }
     return (
         <div className="profile-container">
           <div>
@@ -19,11 +23,11 @@ export const profile = () => {
             />
           </div>
           <div className="ProfileConfigUser__container">
-            <PersonInformation />
+            <PersonInformation onHandleWatchForm = {handleWatchForm}/>
           </div>
           {closeUserForm && 
             <div className='form-container'>
-            <FormUserInfo />
+            <FormUserInfo  onHandleWatchForm = {handleWatchForm}/>
             </div>}
         </div>
     );

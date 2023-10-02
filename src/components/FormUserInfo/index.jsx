@@ -1,18 +1,19 @@
+/* eslint-disable arrow-body-style */
 'use client'
 
 import React, { useState } from 'react'
 import './FormUserInfo.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleEditUser } from '@/redux/slices/userSlice';
+import { useEditUserMutation } from '@/redux/services/userApi';
 
-const FormUserInfo = () => {
-    const [formUserData, setFormUserData] = useState({});
-
-    const handleUserEdit = (userName) => {
-        setUserEditId(userName);
-    
-        setFormUserData(userData[0]);
-    };
+const FormUserInfo = ({onHandleWatchForm}) => {
+  const userData = useSelector((state) => state.userReducer)
+  const dispatch = useDispatch()
+  const [editUser] = useEditUserMutation()
+  const [formUserData, setFormUserData] = useState({...userData.value});
     
     const handleInputUserChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +24,20 @@ const FormUserInfo = () => {
     };
     
     const handleInfoUserSave = async () => {
-    localStorage.removeItem('userData');
-    setUserData([formUserData]);
-    localStorage.setItem('userData', JSON.stringify(formUserData));
-    const token = localStorage.getItem('token');
-    await editUserProfile(token, formUserData);
-    setUserEditId(null);
-    setFormUserData({});
+    sessionStorage.removeItem('userData');
+    dispatch(handleEditUser(formUserData))
+    sessionStorage.setItem('userData', JSON.stringify(formUserData));
+    const token = sessionStorage.getItem('token');
+
+    const data = {
+      headers: {
+        Authorization: token,
+      },
+      body: {...formUserData},
+    }
+    await editUser(data);
+    onHandleWatchForm()
+
     };
 
   return (
@@ -37,7 +45,7 @@ const FormUserInfo = () => {
             <FontAwesomeIcon
               icon={faXmark}
               className="form-user-container__xmark"
-              // onClick={handleClickImage}
+              onClick={onHandleWatchForm}
             />
             <div>
               <label htmlFor="name">
@@ -45,20 +53,20 @@ const FormUserInfo = () => {
                 <input
                   id="name"
                   type="text"
-                  name="user_name"
-                  value={formUserData.user_name}
+                  name="name"
+                  value={formUserData.name}
                   onChange={handleInputUserChange}
                 />
               </label>
             </div>
             <div>
-              <label htmlFor="gender">
+              <label htmlFor="lastName">
                 Apellido:
                 <input
-                  id="gender"
+                  id="lastName"
                   type="text"
-                  name="gender"
-                  value={formUserData.gender}
+                  name="lastName"
+                  value={formUserData.lastName}
                   onChange={handleInputUserChange}
                 />
               </label>
@@ -76,9 +84,15 @@ const FormUserInfo = () => {
               </label>
             </div>
             <div>
-              <label htmlFor="genero">
+              <label htmlFor="gender">
                 <p>Género</p>
-                <select name="genero" id="genero" placeholder='--------'>
+                <select name="gender" 
+                id="gender" 
+                placeholder='--------'
+                value={formUserData.gender}
+                onChange={handleInputUserChange}
+                > 
+                  <option value="">Selecciona un género</option>
                   <option value="Hombre">Hombre</option>
                   <option value="Mujer">Mujer</option>
                   <option value="Otro">Otro</option>
@@ -86,9 +100,15 @@ const FormUserInfo = () => {
               </label>
             </div>
             <div>
-              <label htmlFor="cuidad">
+              <label htmlFor="city">
                 <p>Cuidad</p>
-                <select name="cuidad" id="cuidad" placeholder='--------'>
+                <select name="city" 
+                id="city" 
+                placeholder='--------'
+                value={formUserData.city}
+                onChange={handleInputUserChange}
+                > 
+                  <option value="">Selecciona una cuidad</option>
                   <option value="Medellín">Medellín</option>
                   <option value="Bogotá">Bogotá</option>
                 </select>

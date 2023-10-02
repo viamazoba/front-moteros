@@ -42,7 +42,6 @@ const register = () => {
 
   const handleInfoRegister =  async (e)=>{
     e.preventDefault()
-    console.log('Valores a enviar: ', signInForm)
     const { data } = await registerUser(signInForm)
     dispatch(handleRegisterUser(data.body))
     sessionStorage.setItem('token', data.headers['Authorization'])
@@ -191,7 +190,6 @@ const register = () => {
               </div>
               <p className="text-center">
                 ¿Ya tienes una cuenta?
-                {/* <span onClick={handleShowAccess}>Ingresar</span> */}
                 <span onClick={() => router.push('/login')}>Ingresar</span>
               </p>
             </form>
