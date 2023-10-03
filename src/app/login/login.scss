@@ -79,6 +79,10 @@ form{
       font-size: inherit;
       line-height: 1.5;
     }
+    .validation-warning{
+      color: $color-red;
+      font-weight: 500;
+    }
     input{
       width: 100%;
       margin-top: 5px;
@@ -136,6 +140,10 @@ form{
     margin-top: 20px;
     label{
         font-size: 13px;
+    }
+
+    .validation-warning{
+      color: $color-red;
     }
   }
   .password-group{

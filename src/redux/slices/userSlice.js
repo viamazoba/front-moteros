@@ -30,10 +30,17 @@ export const userSlice = createSlice({
         },
 
         handleUserLogOut: (state) =>{
-            return initialState
+            state.value = {
+                ...initialState.value
+            }
+        },
+        handleUserLogIn: (state, { payload }) =>{
+            state.value = {
+                ...payload
+            }
         }
     }
 })
 
-export const {logIn, handleRegisterUser, handleEditUser, handleUserLogOut} = userSlice.actions;
+export const {handleRegisterUser, handleEditUser, handleUserLogOut, handleUserLogIn} = userSlice.actions;
 export default userSlice.reducer;

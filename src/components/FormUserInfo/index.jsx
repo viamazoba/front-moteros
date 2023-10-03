@@ -37,7 +37,7 @@ const FormUserInfo = ({onHandleWatchForm}) => {
     }
     await editUser(data);
     onHandleWatchForm()
-
+    setFormUserData({})
     };
 
   return (

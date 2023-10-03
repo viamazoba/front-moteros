@@ -1,11 +1,62 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './login.scss'
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import Image from 'next/image';
+import { useGetUserByEmailMutation } from '@/redux/services/userApi';
+import { useDispatch } from 'react-redux';
+import { handleUserLogIn } from '@/redux/slices/userSlice';
+import { useRouter } from 'next/navigation';
 
 export const login = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const [invalidCredentials, setInvalidCredentials] = useState(false)
+  const [showEmailhWarning, setShowEmailWarning] = useState(false);
+  const [ getUserByEmail ] = useGetUserByEmailMutation();
+  const [signInForm, setSignInForm] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleSignInForm = (event) => {
+    const { name, value } = event.target;
+    setSignInForm({
+      ...signInForm,
+      [name]: value,
+    });
+
+    if(invalidCredentials){
+      setInvalidCredentials(false)
+    }
+  };
+
+  const handleClickSubmit =  async (e)=>{
+    e.preventDefault()
+    const response = await getUserByEmail(signInForm)
+    if(response?.error?.status === 401){
+      return setInvalidCredentials(true)
+    }
+     const {data} = response;
+    dispatch(handleUserLogIn(data.body.data))
+    sessionStorage.setItem('token', data.headers['Authorization'])
+    sessionStorage.setItem('userData', JSON.stringify(data.body.data))
+    router.push('/profile')
+  }
+
+  useEffect(() => {
+    
+    if(!emailPattern.test(signInForm.email) && signInForm.email){
+      setShowEmailWarning(true)
+    }else{
+      setShowEmailWarning(false)
+    }
+  }, [signInForm.email]);
+
     return (
         <div className='signin-card'>
           <div className='access-main'>
@@ -21,36 +72,34 @@ export const login = () => {
               />
               <h2>Moteros</h2>
             </div>
-            <form>
-            {/* <form onSubmit={handleClickSubmit}> */}
+            <form onSubmit={handleClickSubmit}>
               <h4>Iniciar sesión</h4>
-              {/* <p>Enter your email & password to login</p> */}
               <p>Ingresa tu correo y contraseña para ingresar</p>
               <div className="form-group email-group">
-                <label htmlFor="sign-in-email">Correo Electrónico</label>
+                <label htmlFor="email">Correo Electrónico</label>
                 <br />
                 <input
-                //   onChange={handleLoginForm}
+                  onChange={handleSignInForm}
                   type="email"
-                  id="sign-in-email"
+                  id="email"
                   name="email"
                   required
                   placeholder="ejemplo@moteros.com"
-                //   value={loginForm.email}
+                  value={signInForm.email}
                 />
+                {showEmailhWarning && <p className='validation-warning'>Ingrese un correo válido</p>}
               </div>
               <div className="form-group password-group">
-                <label htmlFor="sign-in-password">Contraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <br />
                 <input
-                //   onChange={handleLoginForm}
+                  onChange={handleSignInForm}
                   type="password"
-                  id="sign-in-password"
+                  id="password"
                   name="password"
                   required
                   placeholder="***************"
-                //   value={loginForm.password}
-                //   value={loginForm.password}
+                  value={signInForm.password}
                 />
               </div>
               <div className="form-group">
@@ -59,6 +108,7 @@ export const login = () => {
                     Olvidaste tu contraseña?
                   </p>
                 </div>
+                  {invalidCredentials && <p className='validation-warning'>Credenciales inválidas</p>}
                 <div className="btn">
                   <button className="signin-btn" type="submit">Ingresar</button>
                 </div>
