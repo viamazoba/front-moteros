@@ -26,10 +26,18 @@ export const userApi = createApi({
             })
         }),
 
+        getUserByEmail: builder.mutation({
+            query: (userData) =>({
+                url: 'api/user/login',
+                method: 'POST',
+                body: userData
+            })
+        }),
+
         getUserById: builder.query({
             query: ({id}) => `users/${id}`  // Aquí recibes un parámetro para la petición
         })
     })
 })
 
-export const {useLazyGetUserByIdQuery, useRegisterUserMutation, useEditUserMutation} = userApi // Estás son las funciones creadas anteriormente, pero convertidas en hooks (redux lo hace)
+export const {useLazyGetUserByIdQuery, useRegisterUserMutation, useEditUserMutation, useGetUserByEmailMutation} = userApi // Estás son las funciones creadas anteriormente, pero convertidas en hooks (redux lo hace)

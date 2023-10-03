@@ -109,7 +109,7 @@ export const NavBar = ()=> {
             </div>
             <hr />
             <Link href="/profile" onClick={handleUserMenuClick}>Perfil</Link>
-            <Link href="/" onClick={handleSignOut}>Salir</Link>
+            <a href="/" onClick={handleSignOut}>Salir</a>
           </>
           )}
           {

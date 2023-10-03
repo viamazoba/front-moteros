@@ -18,7 +18,6 @@ export const profile = () => {
           <div>
             <PersonCard
               btn2="Hotels"
-            //   userName={userData[0]?.user_name || emptyFields}
               className="PersonCard"
             />
           </div>
