@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NavBar.scss';
 import { faBars, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,7 @@ export const NavBar = ()=> {
   const userData = useSelector((state) => state.userReducer.value)
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const [token, setToken] = useState('');
 
   const handleUserMenuClick = () => {
     setUserMenuOpen(!isUserMenuOpen);
@@ -29,6 +30,12 @@ export const NavBar = ()=> {
   const handleMenuClick = () => {
     setMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+  
+    setToken(sessionStorage.getItem('token'))
+
+  }, []);
 
 
   return (
@@ -82,7 +89,7 @@ export const NavBar = ()=> {
           }
         >
           {
-          sessionStorage.getItem('token')
+          token
           && (
           <>
             <div className="container-header__information">
@@ -113,7 +120,7 @@ export const NavBar = ()=> {
           </>
           )}
           {
-          !sessionStorage.getItem('token')
+          !token
           && (
           <>
             <FontAwesomeIcon
