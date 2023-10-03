@@ -1,0 +1,122 @@
+@import '../../styles/abstract/variables';
+
+.banner-container {
+  height: 30vh;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-image: url('/imagen_header_moteros_2.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .banner-content {
+    width: 100%;
+    max-width: 1400px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 80px;
+
+    color: $color-white;
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    h3 {
+      font-size: $font-size-small;
+      font-weight: 300;
+    }
+  }
+
+  .choose-location {
+    display: flex;
+    margin-top: 5px;
+
+    label {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      margin-right: 20px;
+      text-shadow: 1px 1px 2px rgb(0, 0, 0);
+
+      input {
+        margin-right: 10px;
+        background-color: $color-white;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .banner-container {
+
+    .banner-content {
+      margin-left: 24px;
+      margin-right: 24px;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .cab-search-container {
+    max-width: 1200px;
+  }
+
+  .banner-container {
+    height: 70vh;
+
+    .banner-content {
+      max-width: 1400px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .banner-container {
+    height: 100vh;
+
+    .banner-content {
+
+      h1 {
+        font-size: 4.75rem;
+      }
+
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .banner-container {
+    height: 70vh;
+    padding-bottom: 5%;
+
+    .banner-content {
+      margin: 0;
+      padding: 0;
+
+      h1 {
+        font-size: 7.6rem;
+      }
+
+      h3 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+      }
+    }
+  }
+}

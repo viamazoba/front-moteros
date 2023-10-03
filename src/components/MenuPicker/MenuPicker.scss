@@ -1,0 +1,65 @@
+@import '../../styles/abstract/variables.scss';
+
+.container-input {
+  width: 48%;
+  padding-top: 10px;
+
+  label {
+    display: block;
+
+    p{
+      font-family: inherit;
+      font-size: $font-size-smaller;
+      font-weight: 600;
+      color: $color-white;
+
+      @media (min-width:1024px) {
+        color: $color-black;
+      }
+    }
+
+    select {
+      font-family: inherit;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $color-gray;
+      border-radius: 5px;
+      color: $color-black;
+      background-color: $color-white;
+    }
+    select:focus {
+      border: solid 1px $color-black;
+    }
+  }
+
+  &.modal {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0;
+    width: 100%;
+
+    label>div {
+      margin-bottom: 5px;
+    }
+
+    label>input {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1000px) {
+
+  .container-input {
+    width: 30%;
+    padding: 0 !important;
+    padding-right: 24px !important;
+
+    div {
+      color: $color-black;
+      font-weight: 700;
+    }
+
+  }
+}

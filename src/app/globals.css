@@ -1,0 +1,37 @@
+:root {
+  --color-red:hsla(0, 78.72%, 63.14%, 1.00);
+  --color-black:#222;
+  --color-blue: #51CFED;
+  --color-dark-blue: #1976d2;
+  --color-green: #20c788;
+  --color-white: #f9f9f9;
+
+  --font-size-titles:62px;
+  --font-size-big: 40px;
+  --font-size-medium: 18px;
+  --font-size-small: 16px;
+  --font-size-smaller: 14px;
+
+  --line-heigth-titles: 65px;
+  --line-heigth-regular-text: 25px;
+
+  --border-radius-button: 5px;
+}
+
+
+*, html {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html{
+  font-size: 62.5%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+

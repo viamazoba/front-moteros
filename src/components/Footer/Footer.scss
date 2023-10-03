@@ -1,0 +1,18 @@
+
+@import '../../styles/abstract/variables.scss';
+
+.footer-container{
+    color: $color-white;
+    background-color: $color-black;
+
+    h5{
+        font-family: inherit;
+        font-size: 18px;
+        color: inherit;
+    }
+    p{
+        font-family: inherit;
+        font-size: 14px;
+        color: inherit;
+    }
+}
