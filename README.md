@@ -63,19 +63,19 @@ To run the application, follow these steps:
 Welcome to our homepage! We hope you enjoy it.
 
 - **Homepage**
-- ![Homepage](/homepage.png)
+- ![Homepage](public/homepage.png)
 
 ## Registration and Authentication
 
 If you want to have a personalized experience, you can register and authenticate:
 
 - **Registration:** Create an account with your details.
-- ![Registration](/registration.png)
+- ![Registration](public/registration.png)
 
 - **Login:** Sign in with your credentials.
-- ![Login](/login.png)
+- ![Login](public/login.png)
 
 - **User Profile:** View and edit your profile information.
-- ![User Profile](/user-profile.png)
+- ![User Profile](public/user-profile.png)
 
 Enjoy your Moteros experience!
