@@ -4,9 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userApi = createApi({
     reducerPath: 'userAPI',
     baseQuery: fetchBaseQuery({
-        // baseUrl: 'http://jsonplaceholder.typicode.com/'
-        // baseUrl: process.env.BACKEND_URL
-        baseUrl: 'http://localhost:8080/'
+        baseUrl: 'https://backend-moteros.onrender.com/'
     }),
     endpoints: (builder) => ({
         registerUser: builder.mutation({
